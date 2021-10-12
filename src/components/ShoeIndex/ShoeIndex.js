@@ -12,17 +12,6 @@ import ShoeGrid from "../ShoeGrid";
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
-      <LeftColumn>
-        <BreadcrumbsWrapper>
-          <Breadcrumbs>
-            <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-            <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-            <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
-          </Breadcrumbs>
-        </BreadcrumbsWrapper>
-        <Spacer size={42} />
-        <ShoeSidebar />
-      </LeftColumn>
       <MainColumn>
         <Header>
           <Title>Running</Title>
@@ -36,24 +25,31 @@ const ShoeIndex = ({ sortId, setSortId }) => {
           </Select>
         </Header>
         <Spacer size={34} />
-        {/* <ShoeGrid /> */}
+        <ShoeGrid />
       </MainColumn>
+      <LeftColumn>
+        <Breadcrumbs>
+          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+          <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+        </Breadcrumbs>
+        <Spacer size={42} />
+        <ShoeSidebar />
+      </LeftColumn>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: row-reverse;
+  align-items: baseline;
   gap: 32px;
-`;
-
-const BreadcrumbsWrapper = styled.div`
-  padding: 14px 12px;
-  padding-left: 0;
 `;
 
 const LeftColumn = styled.div`
   height: max-content;
+  flex-basis: 248px;
 `;
 
 const MainColumn = styled.div`
@@ -64,13 +60,13 @@ const MainColumn = styled.div`
 
 const Header = styled.header`
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  justify-content: space-between;
 `;
 
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
-  margin-right: auto;
 `;
 
 export default ShoeIndex;
