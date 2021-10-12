@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import { formatPrice, pluralize, isNewShoe } from '../../utils';
-import Spacer from '../Spacer';
+import { COLORS, WEIGHTS } from "../../constants";
+import { formatPrice, pluralize, isNewShoe } from "../../utils";
+import Spacer from "../Spacer";
 
 const ShoeCard = ({
   slug,
@@ -43,8 +43,9 @@ const ShoeCard = ({
           <Price>{formatPrice(price)}</Price>
         </Row>
         <Row>
-          <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          <ColorInfo>{pluralize("Color", numOfColors)}</ColorInfo>
         </Row>
+        {variant !== "default" && <Flag variant={variant}>{variant}</Flag>}
       </Wrapper>
     </Link>
   );
@@ -55,13 +56,17 @@ const Link = styled.a`
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  position: relative;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
@@ -81,6 +86,23 @@ const ColorInfo = styled.p`
 const SalePrice = styled.span`
   font-weight: ${WEIGHTS.medium};
   color: ${COLORS.primary};
+`;
+
+const Flag = styled.span`
+  position: absolute;
+  text-transform: uppercase;
+  padding: 7px 9px 9px 11px;
+  top: 12px;
+  right: 0;
+  background-color: ${({ variant }) =>
+    variant === "on-sale"
+      ? COLORS.primary
+      : variant === "new-release"
+      ? COLORS.secondary
+      : ""};
+  color: ${COLORS.white};
+  font-weight: ${WEIGHTS.bold};
+  font-size: 14px;
 `;
 
 export default ShoeCard;
